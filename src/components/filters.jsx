@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Filter, X, Calendar, TrendingUp, Download, ChevronDown } from 'lucide-react';
 import { statsAPI } from '../services/api';
-
+import { Link } from 'react-router-dom';
 const FiltersComponent = ({ 
   filters = {},
   handleFilterChange,
@@ -381,7 +381,11 @@ const FiltersComponent = ({
           <Download className="w-4 h-4 mr-1" />
           Generate Report
         </button>
-
+        <Link to="/dashboard"  className="flex items-center px-3 py-2 border text-gray-300 text-sm hover:opacity-80 transition-all duration-200"
+          style={{ backgroundColor: '#202126', borderColor: '#525866' }}
+        >
+         View  Dashboard
+        </Link>
         {hasActiveFilters && (
           <button 
             onClick={clearFilters || (() => console.log('Clear filters'))}

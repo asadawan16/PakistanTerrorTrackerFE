@@ -41,15 +41,29 @@ const Dashboard = () => {
       
       if (response?.success) {
         // Transform incidents to match component expectations
-        const transformedIncidents = response.data.map(incident => ({
-          id: incident._id,
-          description: incident.newsDescription || `${incident.attackType} attack in ${incident.location || formatRegionName(incident.region) || 'Unknown Location'}`,
-          date: new Date(incident.incidentDate).toLocaleDateString('en-GB'), // DD/MM/YYYY format
-          location: incident.location || formatRegionName(incident.region) || 'Unknown Location',
-          region: incident.region,
-          attackType: incident.attackType,
-          casualties: incident.casualties
-        }));
+        const transformedIncidents = response.data.map(incident => {
+          // Handle location data properly
+          let locationDisplay = 'Unknown Location';
+          if (incident.location && incident.location.city && incident.location.district) {
+            locationDisplay = `${incident.location.city}, ${incident.location.district}`;
+          } else if (incident.location && incident.location.city) {
+            locationDisplay = incident.location.city;
+          } else if (incident.location && incident.location.district) {
+            locationDisplay = incident.location.district;
+          } else if (incident.region) {
+            locationDisplay = formatRegionName(incident.region);
+          }
+
+          return {
+            id: incident._id,
+            description: incident.newsDescription || `${incident.attackType} attack in ${locationDisplay}`,
+            date: new Date(incident.incidentDate).toLocaleDateString('en-GB'), // DD/MM/YYYY format
+            location: locationDisplay,
+            region: incident.region,
+            attackType: incident.attackType,
+            casualties: incident.casualties
+          };
+        });
         setLatestIncidents(transformedIncidents);
       } else {
         console.warn('No latest incidents received');

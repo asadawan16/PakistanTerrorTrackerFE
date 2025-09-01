@@ -4,7 +4,6 @@ import { Toaster } from 'react-hot-toast';
 import Dashboard from './components/Dashboard';
 import Dashboard2 from '../src/components/Dashboard/Dashboard2';
 import IncidentForm from './components/IncidentForm';
-import Footer from './components/Footer';
 import './App.css';
 
 const App = () => {
@@ -24,7 +23,7 @@ const App = () => {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/dashboard2" element={<Dashboard2 />} />
+            <Route path="/dashboard" element={<Dashboard2 />} />
             <Route path="/add-incident" element={<IncidentForm />} />
           </Routes>
         </main>

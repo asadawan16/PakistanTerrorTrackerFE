@@ -59,7 +59,7 @@ const AttackTypeChart = ({ data = [], isLoading = false }) => {
   }
 
   return (
-    <div className="border border-gray-800 rounded-lg p-6" style={{ backgroundColor: '#262626' }}>
+    <div className="border border-gray-800 rounded-xl p-6 pb-24" style={{ backgroundColor: '#262626' }}>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-bold text-white">Attack Types by Group</h2>
         <div className="text-sm text-gray-400">Group Analysis</div>
